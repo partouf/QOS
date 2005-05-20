@@ -1,0 +1,74 @@
+
+QOS FileSystem description
+--------------------------
+
+Version 1.0
+24-04-2004
+
+
+Changes since last version:
+ - None
+
+
+
+Overview
+--------------------------
+
+The filesystem is pretty basic, with a number of limitations. The most
+important limitation is the number of directories and files, which is
+28 directories, including root directory, without subdirectories, and
+25 files in every directory. This also means there should be no more
+space filled with file index tables than 26 sectors.
+
+However concerning the files, there are more flexible properties.
+Every file has a 12 byte filename, can be placed anywhere within 65535
+sectors and span a maximum of 255 sectors.
+
+The directory tables are basicly the same with a 12 byte name, and
+with the reference to the file table somewhere within 65535 sectors.
+
+
+
+VDIR Drive Table
+--------------------------
+
+Every disk formatted with the QOS Filesystem has a VDIR Table, which
+is always located at the second sector of the disk. For every
+directory there's a record the name and address of the matching file
+table.
+
+   Total of Directories:    1 B
+   Undefined:               3 B
+   Volume Name:             11B
+
+   Repeat up to 27 times (18 Bytes)
+      Directory Name:       12B
+      Filetable Sector:     2 B
+      Extra Options:        4 B
+
+
+
+VDIR File Table
+--------------------------
+
+For every directory there should be a Filetable which contains the
+references to the files within the directory. Every file reference has
+a information about the filename, attributes, position and length.
+Each FileTable is refered to in the VDIR Table, except for the Root
+directory FileTable which is always placed in the third sector without
+referral.
+
+   Total of Files:          1 B
+   Undefined:               11B
+
+   Repeat up to 25 times (20 Bytes)
+      File Name:            12B
+      Attributes:           1 B
+      File Sector:          2 B
+      Sector Span:          1 B
+      Offset:               2 B
+      Size:                 2 B
+
+
+
+

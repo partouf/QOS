@@ -1,0 +1,41 @@
+
+QOS BootSector description
+--------------------------
+
+Version 1.0
+24-04-2004
+
+
+Changes since last version:
+ - None
+
+
+
+Overview
+--------------------------
+
+The bootsector is the first sector that should be executed at boot
+time. It should be able to run on almost every computer, therefor
+be written in strictly 16bit assembler code. The main goal is to
+load the kernel from the disk into the memory.
+
+
+Current Features
+--------------------------
+
+Currently there is a partial support for the QOS FileSystem, which
+enables that the kernel can be build as if it were a normal file.
+However, the kernel must have some specific properties. The kernel
+must be located in the Root directory of the disk, under the name
+'QCore' and the attribute byte set to 0xFF.
+
+
+Boot sequence
+--------------------------
+
+   1. The stack is installed at 0x9000:0x0000.
+   2. The Root directory is loaded and stored.
+   3. Root directory is searched for QCore with attributes 0xFF.
+   4. The kernel is loaded into memory at 0x0060:0x0000.
+   5. Segments are reset and the kernel is executed.
+
