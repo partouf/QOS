@@ -1,0 +1,37 @@
+
+QOS Memory structure
+--------------------------
+
+Version 0.1
+24-04-2004
+
+
+Changes since last version:
+ - None
+
+
+
+Overview
+--------------------------
+
+??
+
+
+Table
+--------------------------
+
+Part		Address		Size
+----		-------		----
+
+QCore		0x0060:0x0000	Undefined
+Bootdrive	0x7C00:0x087B	1 Byte
+
+Stack		0x9000:0x0000	Undefined downwards
+
+Mountpoints	0x??		lots, times 4 Bytes (pointer to VDir)
+
+Cur. VScreen	0x??		1 Byte
+Virt.Screens	0x??		lots, times 8 Bytes
+
+SWInterrupts	0x??		??
+
